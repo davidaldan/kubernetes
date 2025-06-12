@@ -35,13 +35,13 @@ kubectl delete deployment name
 ```bash
 kubectl create -f file.yml
 kubectl apply -f file.yml
+```
 
 ## REPLICASET
 ```bash
 kubectl delete replicationcontroller name (viejo modo)
 kubectl get replicaset
 kubectl delete replicaset name
-
 # Actualizar replicas:
 kubectl scale --replicas=2 -f rstest.yml
 ```
