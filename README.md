@@ -1,7 +1,9 @@
 # KUBERNETES
 
-ver url del servicio de minikube
+```bash
+# ver url del servicio de minikube
 minikube service app1-service --url
+```
 
 ## PODS
 ```bash
