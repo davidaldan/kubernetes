@@ -69,6 +69,7 @@ kubectl get services
 ```bash
 kubectl get namespaces
 kubectl get pods --all-namespaces
+kubectl get pods --namespace=name
 ```
 
 ## CONFIGMAP
@@ -78,4 +79,35 @@ kubectl get configmap -o wide
 kubectl get configmap game-config -o yaml
 ```
 
+## SECRETS
+```bash
+echo -n 'admin' > ./username.txt 
+echo -n '123456' > ./password.txt
+kubectl create secret generic db-user-pass --from-file=username.txt --from-file=password.txt
+kubectl get secrets
 
+#encript and decript base64
+kubernetes % echo -n 'admin' | base64
+echo 'YWRtaW4=' | base64 --decode
+
+#ver variables de secret en mypod
+kubectl exec mypod -- ls /etc/foo
+#ver detalle del secret en mypod
+kubectl exec mypod -- cat /etc/foo/username
+
+# ver env en modo
+kubectl exec secret-env-pod -- env | grep SECRET
+
+```
+
+## PRUEBA
+```bash
+kubectl create namespace appvotacion
+kubectl apply -f . --namespace=appvotacion
+kubectl get deployments --namespace=appvotacion
+kubectl get services --namespace=appvotacion
+kubectl scale deployment vote --replicas=5 --namespace=appvotacion
+kubectl scale deployment result --replicas=5 --namespace=appvotacion
+kubectl delete all --all --namespace=appvotacion
+ kubectl delete namespace appvotacion
+```
